@@ -11,3 +11,6 @@ def alpha(f):
     result = np.power(f*integral[0], -0.5)
 
     return result
+
+print(alpha(50))
+print(alpha(1))
