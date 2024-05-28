@@ -41,8 +41,6 @@ answer_frame.grid(
     row=2, column=1, padx=10, pady=(20, 10), sticky="nsew"
 )
 
-
-
 equation_u_frame = ttk.Frame(conditions_frame)
 equation_u_frame.grid(
     row=0, column=0, padx=10, pady=(20, 10), sticky="nsew"
