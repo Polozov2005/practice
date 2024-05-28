@@ -15,26 +15,28 @@ root.tk.call("set_theme", "dark")
 
 for index in [0, 1]:
     root.columnconfigure(index=index, weight=1)
-root.rowconfigure(index=0, weight=1)
+for index in [0, 1, 2]:
+    root.rowconfigure(index=index, weight=1)
 
 graph_frame = ttk.LabelFrame(root, text="График функции u(t)", padding=(20, 10))
 graph_frame.grid(
-    row=0, column=0, padx=10, pady=(20, 10), sticky="nsew"
+    row=0, column=0, padx=10, pady=(20, 10), sticky="nsew", rowspan=3
 )
 
-graph_checkbutton = ttk.Checkbutton(
-    graph_frame, text="Unchecked", variable=None
-)
-graph_checkbutton.grid(row=0, column=0, padx=0, pady=0)
-
-
-
-widgets_frame = ttk.LabelFrame(root, text="Widgets", padding=(20, 10))
-widgets_frame.grid(
+conditions_frame = ttk.LabelFrame(root, text="", padding=(20, 10))
+conditions_frame.grid(
     row=0, column=1, padx=10, pady=(20, 10), sticky="nsew"
 )
 
+solve_frame = ttk.LabelFrame(root, text="Решить", padding=(20, 10))
+solve_frame.grid(
+    row=1, column=1, padx=10, pady=(20, 10), sticky="nsew"
+)
 
+answer_frame = ttk.LabelFrame(root, text="Ответ", padding=(20, 10))
+answer_frame.grid(
+    row=2, column=1, padx=10, pady=(20, 10), sticky="nsew"
+)
 
 
 root.update()
