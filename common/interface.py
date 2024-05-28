@@ -23,10 +23,13 @@ graph_frame.grid(
     row=0, column=0, padx=10, pady=(20, 10), sticky="nsew", rowspan=3
 )
 
-conditions_frame = ttk.LabelFrame(root, text="", padding=(20, 10))
+conditions_frame = ttk.LabelFrame(root, text="Начальные условия", padding=(20, 10))
 conditions_frame.grid(
     row=0, column=1, padx=10, pady=(20, 10), sticky="nsew"
 )
+for index in range(5):
+    conditions_frame.columnconfigure(index=index, weight=1)
+
 
 solve_frame = ttk.LabelFrame(root, text="Решить", padding=(20, 10))
 solve_frame.grid(
@@ -38,6 +41,26 @@ answer_frame.grid(
     row=2, column=1, padx=10, pady=(20, 10), sticky="nsew"
 )
 
+
+
+u_frame = ttk.Frame(conditions_frame)
+u_frame.grid(
+    row=0, column=0, padx=10, pady=(20, 10), sticky="nsew"
+)
+u_label = ttk.Label(u_frame, text ="u(t)=sincos schkibididopeeyes")
+u_label.grid(
+    row=0, column=0, sticky='nsew'
+)
+
+
+U_frame = ttk.Frame(conditions_frame)
+U_frame.grid(
+    row=1, column=0, padx=10, pady=(20, 10), sticky='nsew'
+)
+U_label = ttk.Label(U_frame, text ="U = integral(U_0foisdjfsjdfl)")
+U_label.grid(
+    row=0, column=0, sticky='nsew'
+)
 
 root.update()
 x_cordinate = int((root.winfo_screenwidth() / 2) - (root.winfo_width() / 2))
