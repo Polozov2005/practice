@@ -1,9 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import figure
 import locale
 
 def plotting(function, a, b):
-    fig, ax = plt.subplots()
+    fig = figure.Figure()
+    ax = fig.add_subplot()
     locale.setlocale(locale.LC_NUMERIC, "de_RU")
     font = {'family': 'Segoe Ui',
             'size': 10}
