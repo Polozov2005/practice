@@ -155,7 +155,7 @@ solve_button = ttk.Button(
     solve_frame, text="Решить", style="Accent.TButton", command=solve_command
 )
 solve_button.config(width=30)
-solve_button.grid(row=0, column=0, padx=(100, 0), sticky="nsew")
+solve_button.grid(row=0, column=0, padx=(250, 0), sticky="nsew")
 
 T_frame = ttk.Frame(answer_frame)
 T_frame.grid(
