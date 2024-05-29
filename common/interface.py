@@ -1,10 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
 from ctypes import windll
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 import equation
 import built_in_integration
 import my_integration
+import plotting
 
 windll.shcore.SetProcessDpiAwareness(1)
 
@@ -22,7 +24,8 @@ root.columnconfigure(index=1, weight=1)
 for index in [0, 2]:
     root.rowconfigure(index=index, weight=1)
 
-graph_frame = ttk.LabelFrame(root, text="График функции u(t)", padding=(20, 10))
+# graph_frame = ttk.LabelFrame(root, text="График функции u(t)", padding=(20, 10))
+graph_frame = ttk.Frame(root)
 graph_frame.grid(
     row=0, column=0, sticky="nsew", rowspan=3
 )
@@ -34,10 +37,9 @@ conditions_frame.grid(
 for index in range(5):
     conditions_frame.rowconfigure(index=index, weight=1)
 
-# solve_frame = ttk.LabelFrame(root, text="Решить", padding=(20, 10))
-solve_frame = ttk.Frame(root, padding=(20, 10))
+solve_frame = ttk.Frame(root, padding=(0, 10))
 solve_frame.grid(
-    row=1, column=1, padx=10, pady=(20, 0), sticky="nsew"
+    row=1, column=1, padx=0, pady=(20, 0), sticky="nsew"
 )
 
 answer_frame = ttk.LabelFrame(root, text="Ответ", padding=(20, 10))
@@ -46,6 +48,21 @@ answer_frame.grid(
 )
 for index in range(2):
     answer_frame.rowconfigure(index=index, weight=1)
+
+
+def y(x):
+    return 0 * x
+fig = plotting.plotting(y, 0, 0)
+graph_canvas = FigureCanvasTkAgg(fig, master = graph_frame)
+graph_canvas.draw()
+graph_canvas.get_tk_widget().grid(row = 0, column = 0)
+
+
+
+
+
+
+
 
 equation_u_frame = ttk.Frame(conditions_frame)
 equation_u_frame.grid(
@@ -126,10 +143,18 @@ def solve_command():
         alpha = my_integration.alpha(f)
 
     T = equation.T(f)
+
+    U_0 = equation.U_0(alpha, U)
+
+    y = lambda x: equation.u(x, f, U_0)
+    fig = plotting.plotting(y, 0, T)
+    graph_canvas = FigureCanvasTkAgg(fig, master = graph_frame)
+    graph_canvas.draw()
+    graph_canvas.get_tk_widget().grid(row = 0, column = 0)
+
     T = round(T, 3)
     T_var.set(T)
 
-    U_0 = equation.U_0(alpha, U)
     U_0 = round(U_0, 3)
     U_0_var.set(U_0)
 
@@ -137,7 +162,7 @@ solve_button = ttk.Button(
     solve_frame, text="Решить", style="Accent.TButton", command=solve_command
 )
 solve_button.config(width=30)
-solve_button.grid(row=0, column=0, padx=10, sticky="nsew")
+solve_button.grid(row=0, column=0, padx=(100, 0), sticky="nsew")
 
 T_frame = ttk.Frame(answer_frame)
 T_frame.grid(

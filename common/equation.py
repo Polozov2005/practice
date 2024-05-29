@@ -9,6 +9,8 @@ def U_0(alpha, U):
     return result
 
 def u(t, f, U_0):
+    f = float(f)
+    U_0 = float(U_0)
     p = np.pi
 
     result = U_0 * np.sin(2 * p * f * t) + 0.1 * U_0 * np.sin(6 * p * f * t)

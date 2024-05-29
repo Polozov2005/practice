@@ -33,9 +33,3 @@ def plotting(function, a, b):
     fig.set_size_inches(7.2, 7.2)
 
     return fig
-
-def f(x):
-    return np.square(x)
-
-plotting(f, 0, 2)
-plt.show()
