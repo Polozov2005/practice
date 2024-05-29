@@ -115,7 +115,6 @@ optionmenu.grid(
     row=0, column=0, sticky='nsew'
 )
 
-
 def solve_command():
     f = f_entry.get()
     U = U_entry.get()
@@ -127,23 +126,18 @@ def solve_command():
         alpha = my_integration.alpha(f)
 
     T = equation.T(f)
+    T = round(T, 3)
     T_var.set(T)
 
     U_0 = equation.U_0(alpha, U)
+    U_0 = round(U_0, 3)
     U_0_var.set(U_0)
-
-
 
 solve_button = ttk.Button(
     solve_frame, text="Решить", style="Accent.TButton", command=solve_command
 )
 solve_button.config(width=30)
 solve_button.grid(row=0, column=0, padx=10, sticky="nsew")
-# solve_button.place(x=, y=0)
-
-
-
-
 
 T_frame = ttk.Frame(answer_frame)
 T_frame.grid(
@@ -180,9 +174,6 @@ U_0_unit_label = ttk.Label(U_0_frame, text="В")
 U_0_unit_label.grid(
     row=0, column=2, sticky='nsew'
 )
-
-
-
 
 root.update()
 x_cordinate = int((root.winfo_screenwidth() / 2) - (root.winfo_width() / 2))
