@@ -24,7 +24,6 @@ root.columnconfigure(index=1, weight=1)
 for index in [0, 2]:
     root.rowconfigure(index=index, weight=1)
 
-# graph_frame = ttk.LabelFrame(root, text="График функции u(t)", padding=(20, 10))
 graph_frame = ttk.Frame(root)
 graph_frame.grid(
     row=0, column=0, sticky="nsew", rowspan=3
@@ -49,7 +48,6 @@ answer_frame.grid(
 for index in range(2):
     answer_frame.rowconfigure(index=index, weight=1)
 
-
 def y(x):
     return 0 * x
 fig = plotting.plotting(y, 0, 0)
@@ -57,18 +55,12 @@ graph_canvas = FigureCanvasTkAgg(fig, master = graph_frame)
 graph_canvas.draw()
 graph_canvas.get_tk_widget().grid(row = 0, column = 0)
 
-
-
-
-
-
-
-
 equation_u_frame = ttk.Frame(conditions_frame)
 equation_u_frame.grid(
     row=0, column=0, padx=10, pady=(20, 10), sticky="nsew"
 )
-equation_u_label = ttk.Label(equation_u_frame, text ="u(t) = sincos schkibididopeeyes")
+equation_u_image = tk.PhotoImage(file='gfx/u.png')
+equation_u_label = ttk.Label(equation_u_frame, image=equation_u_image)
 equation_u_label.grid(
     row=0, column=0, sticky='nsew'
 )
@@ -77,7 +69,8 @@ equation_U_frame = ttk.Frame(conditions_frame)
 equation_U_frame.grid(
     row=1, column=0, padx=10, pady=(20, 10), sticky='nsew'
 )
-equation_U_label = ttk.Label(equation_U_frame, text ="U = integral(U_0foisdjfsjdfl)")
+equation_U_image = tk.PhotoImage(file='gfx/u_sqrt.png')
+equation_U_label = ttk.Label(equation_U_frame, image=equation_U_image)
 equation_U_label.grid(
     row=0, column=0, sticky='nsew'
 )
