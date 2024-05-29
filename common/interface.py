@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import ttk
 from ctypes import windll
 
+import equation
+import built_in_integration
+import my_integration
+
 windll.shcore.SetProcessDpiAwareness(1)
 
 root = tk.Tk()
@@ -69,7 +73,8 @@ f_label = ttk.Label(f_frame, text="f = ")
 f_label.grid(
     row=0, column=0, sticky='nsew'
 )
-f_entry = ttk.Entry(f_frame)
+f_var = tk.DoubleVar(value=50)
+f_entry = ttk.Entry(f_frame, textvariable=f_var)
 f_entry.grid(
     row=0, column=1, sticky='nsew'
 )
@@ -86,7 +91,8 @@ U_label = ttk.Label(U_frame, text="U = ")
 U_label.grid(
     row=0, column=0, sticky='nsew'
 )
-U_entry = ttk.Entry(U_frame)
+U_var = tk.DoubleVar(value=220)
+U_entry = ttk.Entry(U_frame, textvariable=U_var)
 U_entry.grid(
     row=0, column=1, sticky='nsew'
 )
@@ -110,7 +116,27 @@ optionmenu.grid(
 )
 
 
-solve_button = ttk.Button(solve_frame, text="Решить", style="Accent.TButton")
+def solve_command():
+    f = f_entry.get()
+    U = U_entry.get()
+
+    if optionmenu_var.get() == "Решение встроенной функцией":
+        alpha = built_in_integration.alpha(f)
+
+    if optionmenu_var.get() == "Решение реализованной функцией":
+        alpha = my_integration.alpha(f)
+
+    T = equation.T(f)
+    T_var.set(T)
+
+    U_0 = equation.U_0(alpha, U)
+    U_0_var.set(U_0)
+
+
+
+solve_button = ttk.Button(
+    solve_frame, text="Решить", style="Accent.TButton", command=solve_command
+)
 solve_button.config(width=30)
 solve_button.grid(row=0, column=0, padx=10, sticky="nsew")
 # solve_button.place(x=, y=0)
@@ -127,7 +153,8 @@ T_label = ttk.Label(T_frame, text="T = ")
 T_label.grid(
     row=0, column=0, sticky='nsew'
 )
-T_entry = ttk.Entry(T_frame, state="readonly")
+T_var = tk.DoubleVar(value=0)
+T_entry = ttk.Entry(T_frame, state="readonly", textvariable=T_var)
 T_entry.grid(
     row=0, column=1, sticky='nsew'
 )
@@ -144,7 +171,8 @@ U_0_label = ttk.Label(U_0_frame, text="U_0 = ")
 U_0_label.grid(
     row=0, column=0, sticky='nsew'
 )
-U_0_entry = ttk.Entry(U_0_frame, state="readonly")
+U_0_var = tk.DoubleVar(value=0)
+U_0_entry = ttk.Entry(U_0_frame, state="readonly", textvariable=U_0_var)
 U_0_entry.grid(
     row=0, column=1, sticky='nsew'
 )
